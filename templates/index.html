@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <title>
+        Search for a recipe by entering ingredients. 
+    </title>
+</head>
+<body>
+  {% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="jumbotron jumbotron-fluid" style="background-image: url(https://images.unsplash.com/photo-1438907046657-4ae137eb8c5e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZvb2R8ZW58MHwwfDB8Ymx1ZXw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60); background-size: 100%;">
+        <h1 class="p-3 mb-2 display-4 text-dark"><b>Search for a recipe from your ingredients!</b></h1>
+        <p class="display-5"><b>We utilize API calls to search over 2.3 million recipes!</b> </p>
+        <p><b>You can register / login to save your favorite recipes!</b> </p>
+      </div>
+<section class="bg-gray text-center">      
+    <h1 class="recipe-header"> Enter 1-5 ingredients to find matching recipes!</h1>
+  <form class="form">
+    <div class="form-row align-items-center ">
+      <div class="col-auto">
+        <input type="text" class="form-control mb-2" id="ing1" placeholder="required" required>
+      </div>
+      <div class="col-auto">
+        <input type="text" class="form-control mb-2" id="ing2" placeholder="optional">
+      </div>
+      <div class="col-auto">
+        <input type="text" class="form-control mb-2" id="ing3" placeholder="optional">
+      </div>
+      <div class="col-auto">
+        <input type="text" class="form-control mb-2" id="ing4" placeholder="optional">
+      </div>
+      <div class="col-auto">
+        <input type="text" class="form-control mb-2" id="ing5" placeholder="optional">
+      </div>
+      <div class="col-auto">
+        <button type="submit" id="recipe_search" class="btn btn-success mb-2">Submit ingredients</button>
+      </div>
+    </div>
+  </form>
+</section>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="col-md-2">
+        <h2>Recipe Matches:</h2>
+      </div>
+      <div class="col-md-8">
+        <h2>Recipe ingredients</h2>
+      </div>
+      <div class="col-md-2">
+        <h2>Recipe instructions</h2>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row-fluid" id="recipe-grid">
+    </div>
+  </div>
+  <div>
+    <h2> </h2>
+  </div>
+  {% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="static/models.js"></script>
+    <script type="text/javascript" src="static/main.js"></script>
+    <script type="text/javascript" src="static/recipe.js"></script>
+    <script type="text/javascript" src="static/nav.js"></script>
+    <!--<script type="text/javascript" src="js/script.js"></script>-->
+</body>
+
+</html>
