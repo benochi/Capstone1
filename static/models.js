@@ -10,11 +10,12 @@ const HEADERS = ['Accept-Encoding:: gzip',
 
 class Recipe{
     //make instance of recipe from data object from API:
-    constructor({recipeId, recipeName, image, recipeUrl, ingredientList}){
+    constructor({recipeId, recipeName, image, recipeUrl, recipeUri, ingredientList}){
         this.recipeId = recipeId;
         this.recipeName = recipeName;
         this.image = image;
         this.url = recipeUrl;
+        this.uri = recipeUri;
         this.ingredients = ingredientList;
     };
     
@@ -40,7 +41,8 @@ class Recipe{
                             let recipeName = value.recipe.label; 
                             let image = value.recipe.image;
                             let recipeUrl = value.recipe.url;
-                            
+                            let recipeUri = value.recipe.uri;
+
                             if (value.recipe.ingredientLines){ //seperate ingredients from the other data. 
                                 for(let i = 0; i < value.recipe.ingredientLines.length; i++){
                                     let ings = value.recipe.ingredientLines[i];
@@ -50,7 +52,7 @@ class Recipe{
                             //turn recipe obj from API into instance of Recipe class
                             //recipes = [recipeName, image, recipeUrl];
                             let recipeId = "recipe" + counter;
-                            const recipe = new Recipe({recipeId, recipeName, image, recipeUrl, ingredientList});
+                            const recipe = new Recipe({recipeId, recipeName, image, recipeUrl, recipeUri, ingredientList});
                             recipeList.push(recipe);    
                             };      
                         });

@@ -1,4 +1,5 @@
 """models for reverse recipe app"""
+from enum import unique
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt 
 
@@ -15,16 +16,13 @@ class User(db.Model):
     """user class model"""
     __tablename__ = "users"
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    users_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String(30), nullable=False)
     last_name = db.Column(db.String(30), nullable=False)
     username = db.Column(db.String(20), nullable=False, unique=True)
     pw = db.Column(db.Text, nullable=False)
-    email  = db.Column(db.String(50), nullable=False, unique=True)
-    #favorites = db.relationship("Favorites", backref="user", cascade="all,delete")
-
-    def __repr__(self):
-        return f'<User #{self.id}: name={self.name} email={self.email} birth_year={self.birth_year} color={self.color} lucky_num={self.lucky_num}>'
+    email = db.Column(db.String(50), nullable=False, unique=True)
+    favorites = db.relationship('Favorite')
 
     @classmethod 
     def register(cls, username, pw, first_name, last_name, email):
@@ -45,20 +43,23 @@ class User(db.Model):
     @classmethod
     def authenticate(cls, username, pw):
         """Check user exists and password is correct"""
-        user = User.query.filer_by(username=username).first() #username is unique
+        user = User.query.filter_by(username=username).first() #username is unique
         if user and bcrypt.check_password_hash(user.pw, pw):
             return user
         else:
             return False
 
 ### favorite recipes ###
-#class Recipe(db.Model):
-#    """user recipe join table model"""
-#    __tablename__ = "users_recipes"
 
-#    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#    user_id = db.Column(Integer, ForeignKey('user.id'))
-#    recipe_id = db.Column(Integer, ForeignKey('recipe.id')) #API get request
+class Favorite(db.Model):
+    """user recipe join table model"""
+    __tablename__ = "favorites"
+
+    favorite_users_id =  db.Column(db.Integer, primary_key=True, autoincrement=True)
+    favorites_id = db.Column(db.Text, nullable=False)
+    users_id = db.Column(db.Integer, db.ForeignKey('users.users_id', ondelete='cascade'), nullable=False)
+    user = db.relationship('User')
+
 
 ###serialize function ###
 

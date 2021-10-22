@@ -1,12 +1,14 @@
 "use strict";
 //instance of recipeList
+//references models.js and recipe.js
+let recipeListReponse = [];
+let favoriteRecipesList =[];
+let tempList = []; 
 
 async function getAndShowRecipes() {
     const recipeList = await Recipe.getRecipes();
-    //$recipesLoadingMsg.remove();
-    //console.log(recipeList, "This is inside getandShow")
     putRecipesOnPage(recipeList);
-    //console.log("get and show executed");
+    recipeListReponse = recipeList;
   }
 
 async function generateRecipeMarkup(recipe) {
@@ -14,20 +16,20 @@ async function generateRecipeMarkup(recipe) {
 
     return $(`
     <div class="row">
-      <div class="col-md-2 text-align" id="${recipe.recipeId}"><h3>${recipe.recipeName}<h3><br>
+      <div class="col-md-2 text-align" id="${recipe.recipeId}"><h3>${recipe.recipeName}</h3><br>
       <img src="${recipe.image}"alt="${recipe.recipeName}"width="200" height="200"><br>
+      <button type="submit" id="AddFavorite" data-id="${recipe.uri}" class="favorite-add btn btn-primary mb-2">Favorite!</button>
       </div>
-      <div class="col-md-8 text-align" id="ingredients + ${recipe.recipeId}">${recipe.ingredients}    
+      <div class="col-md-8 text-align" id="ingredients_${recipe.recipeId}">${recipe.ingredients}    
       </div>
-      <div class="col-md-2 text-align" id="instructions + ${recipe.recipeId}">
-      <a href="${recipe.url}">View cooking instructions for ${recipe.recipeName}!</a><br>
+      <div class="col-md-2 text-align" id="instructions_${recipe.recipeId}">
+      <a href="${recipe.url}">View cooking instructions for ${recipe.recipeName}!</a><br>  
       </div>
     </div><br><hr>
       `);
   }
 
 async function putRecipesOnPage(recipeList) {
-    console.debug("putRecipesOnPage");
   
     $recipeGrid.empty(); //clear existing recipes from the HTML grid
     // loop through all recipes and generate HTML for them
@@ -35,7 +37,6 @@ async function putRecipesOnPage(recipeList) {
         const $recipe = await generateRecipeMarkup(recipe);
         $recipeGrid.append($recipe);
       }
-
-    console.log("putRecipesOnPage end!")
     $recipeGrid.show();
   }
+

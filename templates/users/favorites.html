@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.first_name }}{{ user.last_name }}{% endblock %}}
+
+{% block content %}
+
+{% if 'username' in session %}
+<h3>{{ user.username }}'s home page</h3>
+<hr>
+<form action="{{ url_for('show_favorites', username=user.username) }}">
+  <button class="btn btn-primary mb-2" >Show your favorite recipes!</button>
+</form>
+<div class="container-fluid">
+    <div class="row-fluid" id="favorite-grid">
+        {% for key, value in fav_dict.items() %}
+            {% for recipe in value %}
+                <div class="row">
+                    <div class="col-md-2 text-align" id="{{ recipe.name }}"><h3>{{ recipe.name }}</h3><br>
+                    <img src="{{ recipe.img }}"alt="{{ recipe.name }}"width="200" height="200"><br>
+                        <a href="/delete/{{ recipe.recipe_id }}" method="post" class="btn btn-danger mb-2">Delete Favorite.</a>
+                    </div>
+                    <div class="col-md-8 text-align" id="ingredients_{{ recipe.name }}"><h2>Ingredients</h2><hr>{{ recipe.ingredients|join(' ') }}    
+                    </div>
+                    <div class="col-md-2 text-align" id="instructions_{{ recipe.name }}">
+                    <a href="{{ recipe.url }}">View cooking instructions for {{ recipe.name }}!</a><br>  
+                    </div>
+                </div><br><hr>
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endif %}
+
+{% endblock %}
