@@ -28,7 +28,7 @@ class Recipe{
         let ing4 = $('#ing4').val();
         let ing5 = $('#ing5').val();
         let ingredients = [ing1, ing2, ing3, ing4, ing5]; //put values into array for API call
-        let ingredientList=[];
+        
         let recipeList =[];
         let counter = 0;
         let full_url = API_URL + ingredients + APP_KEY + APP_ID; //dynamic API call using user ingredients
@@ -42,6 +42,7 @@ class Recipe{
                             let image = value.recipe.image;
                             let recipeUrl = value.recipe.url;
                             let recipeUri = value.recipe.uri;
+                            let ingredientList=[];
 
                             if (value.recipe.ingredientLines){ //seperate ingredients from the other data. 
                                 for(let i = 0; i < value.recipe.ingredientLines.length; i++){
