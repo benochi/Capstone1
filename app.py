@@ -36,7 +36,10 @@ HEADERS = ['Accept-Encoding:: gzip',
 @app.route("/") #get method
 def homepage():
     """Homepage"""
-    return render_template("index.html")
+    if "username" in session:
+        return render_template("index.html")
+    if "username" not in session:
+        return redirect("/login")
 
 @app.route('/register', methods=['GET', 'POST']) #get method route -> shows form
 def register():
@@ -88,7 +91,7 @@ def show_user(username):
         raise Unauthorized() #unauthorized from werkzueg
     user = User.query.filter_by(username=username).first()
     form = DeleteForm()
-    return render_template("users/favorite.html", user=user, form=form)
+    return render_template("users/user.html", user=user, form=form)
 
 @app.route("/users/<username>/delete", methods=["POST"])
 def remove_user(username):
