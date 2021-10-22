@@ -24,7 +24,7 @@
                     <img src="{{ recipe.img }}"alt="{{ recipe.name }}"width="200" height="200"><br>
                         <a href="/delete/{{ recipe.recipe_id }}" method="post" class="btn btn-danger mb-2">Delete Favorite.</a>
                     </div>
-                    <div class="col-md-8 text-align" id="ingredients_{{ recipe.name }}"><h2>Ingredients</h2><hr><h3>{{ recipe.ingredients|join(' ') }}</h3>    
+                    <div class="col-md-8 text-align" id="ingredients_{{ recipe.name }}"><h2>Ingredients</h2><hr><h5>{{ recipe.ingredients|join(' ') }}</h5>    
                     </div>
                     <div class="col-md-2 text-align" id="instructions_{{ recipe.name }}">
                     <a href="{{ recipe.url }}">View cooking instructions for {{ recipe.name }}!</a><br>  
