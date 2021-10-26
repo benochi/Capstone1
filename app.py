@@ -1,6 +1,5 @@
 import os, requests
 from flask import Flask, render_template, redirect, session, jsonify, json, request, url_for
-from flask_debugtoolbar import DebugToolbarExtension
 from werkzeug.exceptions import Unauthorized
 from flask_sqlalchemy import SQLAlchemy
 from models import connect_db, db, User, Favorite
@@ -16,7 +15,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'shhh'
 
-toolbar = DebugToolbarExtension(app)
 
 connect_db(app)
 
