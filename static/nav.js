@@ -32,9 +32,5 @@ $(document).ready(function(){
             getAndShowFavorites();
         })
 
-        // $("body").on("click", ".favorite-remove", function() {
-        //     $(this).parent().parent('div').remove();
-        //   });
-        
     });
     
