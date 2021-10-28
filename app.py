@@ -118,7 +118,11 @@ def add_favorite():
         db.session.commit()
     return(favorites_id)
 
-@app.route('/users/<username>/favorites') #methods=['GET', 'POST'])
+    #iterate over Database favorite_ids and only add unique URLs
+    #handle favorite recipe API calls and responses
+    #https://api.edamam.com/api/recipes/v2/{id}
+    #limit to first 5 results.
+@app.route('/users/<username>/favorites') 
 def show_favorites(username):
     """send user favorites to edamam API as GET and generate markup from response"""
     if "username" not in session or username != session['username']:
@@ -126,14 +130,12 @@ def show_favorites(username):
     user = User.query.filter_by(username=username).first_or_404()
     favorite_list =[]
     favorites = Favorite.query.filter(Favorite.users_id == user.users_id)
-    #iterate over Database favorite_ids and only add unique URLs
+    
     for i in favorites:
         if i.favorites_id not in favorite_list:
             favorite_list.append(i.favorites_id)
 
-    #handle favorite recipe API calls and responses
-    #https://api.edamam.com/api/recipes/v2/{id}
-    #limit to first 5 results.
+    
     fav_list = favorite_list[:3]
      
     fav_dict = {"recipe":[]}
