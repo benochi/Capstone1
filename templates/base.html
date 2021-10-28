@@ -11,7 +11,6 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
 
@@ -36,7 +35,11 @@
     </li>
   </ul>
 </nav>
-
+<div class="jumbotron jumbotron-fluid" style="background-image: url(https://images.unsplash.com/photo-1438907046657-4ae137eb8c5e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZvb2R8ZW58MHwwfDB8Ymx1ZXw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60); background-size: 100%;">
+  <h1 class="p-3 mb-2 display-4 text-dark"><b>Search for a recipe from your ingredients!</b></h1>
+  <p class="display-5"><b>We utilize API calls to search over 2.3 million recipes!</b> </p>
+  <p><b>You can register / login to save your favorite recipes!</b> </p>
+</div>
 <div class="container mt-5">
   {% for msg in get_flashed_messages() %}
   <div class="alert alert-info">{{ msg }}</div>
@@ -52,4 +55,5 @@
   <script type="text/javascript" src="/static/recipe.js"></script>
   <script type="text/javascript" src="/static/nav.js"></script>
 </body>
+
 </html>
