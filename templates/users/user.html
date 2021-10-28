@@ -3,24 +3,24 @@
 {% block title %}{{ user.first_name }}{{ user.last_name }}{% endblock %}}
 
 {% block content %}
-{% if 'username' in session %}
-<h3>{{ user.username }}'s home page</h3>
-<div class="jumbotron jumbotron-fluid" style="background-image: url(https://images.unsplash.com/photo-1438907046657-4ae137eb8c5e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZvb2R8ZW58MHwwfDB8Ymx1ZXw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60); background-size: 100%;">
-  <h1 class="p-3 mb-2 display-4 text-dark"><b>Search for a recipe from your ingredients!</b></h1>
-  <p class="display-5"><b>We utilize API calls to search over 2.3 million recipes!</b> </p>
-  <p><b>You can register / login to save your favorite recipes!</b><br> </p>
-</div>
-
-<form action="{{ url_for('homepage') }}">
-  <button class="btn btn-primary mb-2" >Search recipes by ingredients!</button>
-</form>
-<hr>
-  <form action="{{ url_for('show_favorites', username=user.username) }}">
-    <button class="btn btn-primary mb-2" >Show your favorite recipes!</button>
-  </form>
-  <div class="container-fluid">
-    <div class="row-fluid" id="favorite-grid">
+  {% if 'username' in session %}
+  <h3>{{ user.username }}'s home page</h3>
+  <div class="jumbotron jumbotron-fluid" style="background-image: url(https://images.unsplash.com/photo-1438907046657-4ae137eb8c5e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZvb2R8ZW58MHwwfDB8Ymx1ZXw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60); background-size: 100%;">
+    <h1 class="p-3 mb-2 display-4 text-dark"><b>Search for a recipe from your ingredients!</b></h1>
+    <p class="display-5"><b>We utilize API calls to search over 2.3 million recipes!</b> </p>
+    <p><b>You can register / login to save your favorite recipes!</b><br> </p>
   </div>
-{% endif %}
+
+  <form action="{{ url_for('homepage') }}">
+    <button class="btn btn-primary mb-2" >Search recipes by ingredients!</button>
+  </form>
+  <hr>
+    <form action="{{ url_for('show_favorites', username=user.username) }}">
+      <button class="btn btn-primary mb-2" >Show your favorite recipes!</button>
+    </form>
+    <div class="container-fluid">
+      <div class="row-fluid" id="favorite-grid">
+    </div>
+  {% endif %}
 {% endblock %}
 

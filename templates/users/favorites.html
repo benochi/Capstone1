@@ -4,38 +4,38 @@
 
 {% block content %}
 
-{% if 'username' in session %}
-<h3>{{ user.username }}'s home page</h3>
-<div class="jumbotron jumbotron-fluid" style="background-image: url(https://images.unsplash.com/photo-1438907046657-4ae137eb8c5e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZvb2R8ZW58MHwwfDB8Ymx1ZXw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60); background-size: 100%;">
-    <h1 class="p-3 mb-2 display-4 text-dark"><b>Search for a recipe from your ingredients!</b></h1>
-    <p class="display-5"><b>We utilize API calls to search over 2.3 million recipes!</b> </p>
-    <p><b>You can register / login to save your favorite recipes!</b><br> </p>
-</div>
-<hr>
-<form action="{{ url_for('show_favorites', username=user.username) }}">
-  <button class="btn btn-primary mb-2" >Show your favorite recipes!</button>
-</form>
-<div class="container-fluid">
-    <div class="row-fluid" id="favorite-grid">
-        {% for key, value in fav_dict.items() %}
-            {% for recipe in value %}
-                <div class="row">
-                    <div class="col-md-2 text-align" id="{{ recipe.name }}"><h3>{{ recipe.name }}</h3><br>
-                    <img src="{{ recipe.img }}"alt="{{ recipe.name }}"width="200" height="200"><br>
-                        <a href="/delete/{{ recipe.recipe_id }}" method="post" class="btn btn-danger mb-2">Delete Favorite.</a>
-                    </div>
-                    <div class="col-md-8 text-align" id="ingredients_{{ recipe.name }}"><h2>Ingredients</h2><hr><h5>{{ recipe.ingredients|join(' ') }}</h5>    
-                    </div>
-                    <div class="col-md-2 text-align" id="instructions_{{ recipe.name }}">
-                    <a href="{{ recipe.url }}">View cooking instructions for {{ recipe.name }}!</a><br>  
-                    </div>
-                </div><br><hr>
-            {% endfor %}
-        {% endfor %}
+    {% if 'username' in session %}
+    <h3>{{ user.username }}'s home page</h3>
+    <div class="jumbotron jumbotron-fluid" style="background-image: url(https://images.unsplash.com/photo-1438907046657-4ae137eb8c5e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZvb2R8ZW58MHwwfDB8Ymx1ZXw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60); background-size: 100%;">
+        <h1 class="p-3 mb-2 display-4 text-dark"><b>Search for a recipe from your ingredients!</b></h1>
+        <p class="display-5"><b>We utilize API calls to search over 2.3 million recipes!</b> </p>
+        <p><b>You can register / login to save your favorite recipes!</b><br> </p>
     </div>
-</div>
+    <hr>
+    <form action="{{ url_for('show_favorites', username=user.username) }}">
+    <button class="btn btn-primary mb-2" >Show your favorite recipes!</button>
+    </form>
+    <div class="container-fluid">
+        <div class="row-fluid" id="favorite-grid">
+            {% for key, value in fav_dict.items() %}
+                {% for recipe in value %}
+                    <div class="row">
+                        <div class="col-md-2 text-align" id="{{ recipe.name }}"><h3>{{ recipe.name }}</h3><br>
+                        <img src="{{ recipe.img }}"alt="{{ recipe.name }}"width="200" height="200"><br>
+                            <a href="/delete/{{ recipe.recipe_id }}" method="post" class="btn btn-danger mb-2">Delete Favorite.</a>
+                        </div>
+                        <div class="col-md-8 text-align" id="ingredients_{{ recipe.name }}"><h2>Ingredients</h2><hr><h5>{{ recipe.ingredients|join(' ') }}</h5>    
+                        </div>
+                        <div class="col-md-2 text-align" id="instructions_{{ recipe.name }}">
+                        <a href="{{ recipe.url }}">View cooking instructions for {{ recipe.name }}!</a><br>  
+                        </div>
+                    </div><br><hr>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
 
 
-{% endif %}
+    {% endif %}
 
 {% endblock %}
