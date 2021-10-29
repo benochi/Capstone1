@@ -10,7 +10,7 @@
 .jumbotron p{
     color: #000000;
     margin-left: 20px;
-    text-shadow: 2px 2px 2px #000;
+    text-shadow: 2px 2px 2px rgb(145, 143, 143);
 }
 .recipe-form {
     background-color:  #B8B8B8;
