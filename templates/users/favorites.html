@@ -17,6 +17,19 @@
     <hr>
     <form action="{{ url_for('show_favorites', username=user.username) }}">
     <button class="btn btn-primary mb-2" >Show your favorite recipes!</button>
+    <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="col-md-2">
+            <h2>Recipe Matches:</h2>
+          </div>
+          <div class="col-md-8">
+            <h2>Recipe ingredients</h2>
+          </div>
+          <div class="col-md-2">
+            <h2>Recipe instructions</h2>
+          </div>
+        </div>
+      </div>
     </form>
     <div class="container-fluid">
         <div class="row-fluid" id="favorite-grid">
