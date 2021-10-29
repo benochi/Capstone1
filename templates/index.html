@@ -1,11 +1,16 @@
 
     {% block title %}
-        Search for a recipe by entering ingredients. 
+        <title>Search for a recipe by entering ingredients.</title> 
     {% endblock %}
 
-  {% extends 'base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="static/css/bootstrap/bootstrap.css">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
   <section class="bg-gray text-center">      
       <h1 class="recipe-header"> Enter 1-5 ingredients to find matching recipes!</h1>
     <form class="form">
