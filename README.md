@@ -39,4 +39,4 @@
 
 ## Stack used in this app
   HTML, CSS, JavaScript, JQuery, Python, Flask, SQLAlchemy, Jinja2, WTForms, postgreSQL.
-  Hosting through Github and Heroku. 
+   Hosting through Github and Heroku. 
