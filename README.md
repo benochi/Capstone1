@@ -1,4 +1,4 @@
-# Recipe Lookup Application using Edamam API - search by ingredients! 
+# RecipeLookup Application! 
 
   RecipeLookup uses a list of up to 5 ingredients to search the Edamam database for recipes that you can make 
   with those ingredients.  The database contains over 1.2 million ingredients to match users with several options.
