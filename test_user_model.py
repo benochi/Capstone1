@@ -1,14 +1,9 @@
 """User model tests."""
-
 # run these tests like:
-#
 #    python -m unittest test_user_model.py
-
-
 import os
 from unittest import TestCase
 from sqlalchemy import exc
-
 from models import db, User
 
 # BEFORE we import our app, let's set an environmental variable
@@ -17,10 +12,8 @@ from models import db, User
 # connected to the database
 
 os.environ['DATABASE_URL'] = "postgresql:///capstone-test"
-
-
+#correct address for Heroku = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 # Now we can import app
-
 from app import app
 
 # Create our tables (we do this here, so we only create the tables
