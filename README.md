@@ -3,7 +3,6 @@
   RecipeLookup uses a list of up to 5 ingredients to search the Edamam database for recipes that you can make 
   with those ingredients.  The database contains over 1.2 million ingredients to match users with several options.
   Users register to use the recipe search function and this allows users to save a list of favorite recipes for easy queueries.
-  
   RecipeLookup will return a picture, recipe name, ingredient list, and a link to the cooking instructions if the user is interested. 
 
 ### Features:
