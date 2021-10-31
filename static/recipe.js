@@ -17,10 +17,10 @@ async function generateRecipeMarkup(recipe) {
     return $(`
     <div class="row">
       <div class="col-md-2 text-align" id="${recipe.recipeId}"><h3>${recipe.recipeName}</h3><br>
-      <img class="visible-lg" src="${recipe.image}" alt="${recipe.recipeName} width="250" height="250" />
-      <img class="visible-md" src="${recipe.image}" alt="${recipe.recipeName} width="200" height="200" />
-      <img class="visible-sm" src="${recipe.image}" alt="${recipe.recipeName} width="150" height="150" />
-      <img class="visible-xs" src="${recipe.image}" alt="${recipe.recipeName} width="100" height="100" /><br>
+      <img class="visible-lg" src="${recipe.image}" alt="${recipe.recipeName} width="200" height="200" />
+      <img class="visible-md" src="${recipe.image}" alt="${recipe.recipeName} width="150" height="150" />
+      <img class="visible-sm" src="${recipe.image}" alt="${recipe.recipeName} width="100" height="100" />
+      <img class="visible-xs" src="${recipe.image}" alt="${recipe.recipeName} width="50" height="50" /><br>
       <button type="submit" id="AddFavorite" data-id="${recipe.uri}" class="favorite-add btn btn-primary mb-2">Favorite!</button>
       </div>
       <div class="col-md-8 text-align" id="ingredients_${recipe.recipeId}"><h3>${recipe.ingredients}</h3>    
