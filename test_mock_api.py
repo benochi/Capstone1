@@ -37,3 +37,5 @@ class ApiTest(TestCase):
         self.assertTrue(b'uri' in response.data)
         self.assertTrue(b'ingredients' in response.data)
 
+
+    
