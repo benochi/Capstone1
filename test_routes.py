@@ -11,7 +11,7 @@ from app import app
 db.create_all()
 
 
-class RouteTest(testCase):
+class RouteTest(TestCase):
     """make sure all routes return 200"""    
 
     def testResponseIndex(self):
