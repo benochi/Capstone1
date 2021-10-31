@@ -6,7 +6,7 @@ from models import db, User
 
 os.environ['DATABASE_URL'] = "postgresql:///capstone-test"
 #correct address for Heroku = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
-from app import APP_ID
+from app import app
 
 db.create_all()
 
