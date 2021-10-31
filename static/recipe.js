@@ -20,7 +20,7 @@ async function generateRecipeMarkup(recipe) {
       <img class="visible-lg" src="${recipe.image}" alt="${recipe.recipeName} width="150" height="150" />
       <img class="visible-md" src="${recipe.image}" alt="${recipe.recipeName} width="150" height="150" />
       <img class="visible-sm" src="${recipe.image}" alt="${recipe.recipeName} width="100" height="100" />
-      <img class="visible-xs" src="${recipe.image}" alt="${recipe.recipeName} width="50" height="50" /><br>
+      <img class="visible-xs" src="${recipe.image}" alt="${recipe.recipeName} width="100" height="100" /><br>
       <button type="submit" id="AddFavorite" data-id="${recipe.uri}" class="favorite-add btn btn-primary mb-2">Favorite!</button>
       </div>
       <div class="col-md-8 text-align" id="ingredients_${recipe.recipeId}"><h3>${recipe.ingredients}</h3>    
