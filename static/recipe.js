@@ -17,7 +17,6 @@ async function generateRecipeMarkup(recipe) {
     return $(`
     <div class="row">
       <div class="col-md-2 text-align" id="${recipe.recipeId}"><h3>${recipe.recipeName}</h3><br>
-      <img class="visible-xl" src="${recipe.image}" alt="${recipe.recipeName} width="200" height="200" />
       <img class="visible-lg" src="${recipe.image}" alt="${recipe.recipeName} width="150" height="150" />
       <img class="visible-md" src="${recipe.image}" alt="${recipe.recipeName} width="150" height="150" />
       <img class="visible-sm" src="${recipe.image}" alt="${recipe.recipeName} width="100" height="100" />
