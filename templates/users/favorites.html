@@ -36,14 +36,14 @@
             {% for key, value in fav_dict.items() %}
                 {% for recipe in value %}
                     <div class="row">
-                        <div class="col-md-2 text-align" id="{{ recipe.name }}"><h3>{{ recipe.name }}</h3><br>
+                        <div class="col-md-3 text-align" id="{{ recipe.name }}"><h3>{{ recipe.name }}</h3><br>
                         <img class="visible-lg" src="{{ recipe.img }}" alt="{{ recipe.img }}" width="200" height="200" />
                         <img class="visible-md" src="{{ recipe.img }}" alt="{{ recipe.img }}" width="150" height="150" />
                         <img class="visible-sm" src="{{ recipe.img }}" alt="{{ recipe.img }}" width="100" height="100" />
                         <img class="visible-xs" src="{{ recipe.img }}" alt="{{ recipe.img }}" width="100" height="100" /><br>
                             <a href="/delete/{{ recipe.recipe_id }}" method="post" class="btn btn-danger mb-2">Delete Favorite.</a>
                         </div>
-                        <div class="col-md-8 text-align" id="ingredients_{{ recipe.name }}"><h2>Ingredients</h2><hr><h5>{{ recipe.ingredients|join(' ') }}</h5>    
+                        <div class="col-md-7 text-align" id="ingredients_{{ recipe.name }}"><h2>Ingredients</h2><hr><h5>{{ recipe.ingredients|join(' ') }}</h5>    
                         </div>
                         <div class="col-md-2 text-align" id="instructions_{{ recipe.name }}">
                         <a href="{{ recipe.url }}">View cooking instructions for {{ recipe.name }}!</a><br>  
