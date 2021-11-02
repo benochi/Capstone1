@@ -10,12 +10,12 @@ from forms import RegisterForm, LoginForm, DeleteForm
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///capstone' #os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'shhh'
 
-
+#for localhosting - 'postgresql:///capstone'
 connect_db(app)
 
 # edamam API info

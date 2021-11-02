@@ -38,3 +38,10 @@ $(document).ready(function(){
         
     });
     
+//pagination
+    /* "_links" : {
+    "next" : {
+      "title" : "Next page",
+      "href" : "https://api.edamam.com/api/food-database/v2/parser?..."
+    }
+} */

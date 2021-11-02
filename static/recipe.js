@@ -6,27 +6,36 @@ let favoriteRecipesList =[];
 let tempList = []; 
 
 async function getAndShowRecipes() {
+  console.log($('#ing1').val())
+  if (typeof $('#ing1').val() != 'undefined' && $('#ing1').val() != '') {
+    console.log(ing1)
     const recipeList = await Recipe.getRecipes();
-    putRecipesOnPage(recipeList);
-    recipeListReponse = recipeList;
+    if(recipeList.length == 0){
+      putNoRecipesErrorOnPage();
+    }
+    else{
+      putRecipesOnPage(recipeList);
+      recipeListReponse = recipeList;
+    }
   }
+  else {
+    putStringErrorOnPage($('ing1').val())
+  }
+}
 
 async function generateRecipeMarkup(recipe) {
   //create bootstrap grid rows for up to ten results. Link to recipe page for cooking directions(not included in API response) 
 
     return $(`
     <div class="row">
-      <div class="col-md-3 text-align" id="${recipe.recipeId}"><h3>${recipe.recipeName}</h3><br>
-      <img class="visible-lg" src="${recipe.image}" alt="${recipe.recipeName} width="200" height="200" />
-      <img class="visible-md" src="${recipe.image}" alt="${recipe.recipeName} width="150" height="150" />
-      <img class="visible-sm" src="${recipe.image}" alt="${recipe.recipeName} width="100" height="100" />
-      <img class="visible-xs" src="${recipe.image}" alt="${recipe.recipeName} width="100" height="100" /><br>
+      <div class="col-md-4 text-align" id="${recipe.recipeId}"><h3>${recipe.recipeName}</h3><br>
+      <img class="visible-lg" src="${recipe.image}" alt="${recipe.recipeName} width="200" height="200" /><br>
       <button type="submit" id="AddFavorite" data-id="${recipe.uri}" class="favorite-add btn btn-primary mb-2">Favorite!</button>
       </div>
-      <div class="col-md-7 text-align" id="ingredients_${recipe.recipeId}"><h3>${recipe.ingredients}</h3>    
+      <div class="col-md-6 text-align" id="ingredients_${recipe.recipeId}"><h3>${recipe.ingredients}</h3>    
       </div>
       <div class="col-md-2 text-align" id="instructions_${recipe.recipeId}">
-      <a href="${recipe.url}">View cooking instructions for ${recipe.recipeName}!</a><br>  
+      <a href="${recipe.url}"><h3>View cooking instructions for ${recipe.recipeName}!</h3></a><br>  
       </div>
     </div><br><hr>
       `);
@@ -43,3 +52,23 @@ async function putRecipesOnPage(recipeList) {
     $recipeGrid.show();
   }
 
+function putStringErrorOnPage(val) {
+  
+    $recipeGrid.empty(); //clear existing recipes from the HTML grid
+    // display error message with val
+      const error = `<div class="alert alert-danger">
+                        <h2>ingredient 1: "${val}"" is not a valid ingredient</h2>
+                      </div>`
+      $recipeGrid.append(error);
+    $recipeGrid.show();
+  }
+
+function putNoRecipesErrorOnPage() {
+  $recipeGrid.empty(); //clear existing recipes from the HTML grid
+    // display error message with val
+      const error = `<div class="alert alert-danger">
+                        <h2>No recipes matched your search</h2>
+                      </div>`
+      $recipeGrid.append(error);
+    $recipeGrid.show();
+  }

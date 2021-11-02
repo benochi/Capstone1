@@ -7,7 +7,6 @@
 
 {% block content %}
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
   <link rel="stylesheet" href="static/css/bootstrap/bootstrap.css">
   <link rel="stylesheet" href="static/css/style.css">
 </head>
@@ -37,20 +36,23 @@
     </form>
   </section>
   <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="col-md-3">
+    <div class="row">
+      <div class="inline col-md-4">
         <h2>Recipe Matches:</h2>
       </div>
-      <div class="col-md-7">
-        <h2>Recipe ingredients</h2>
+      <div class="col-md-6">
+        <h2>Recipe ingredients:</h2>
       </div>
       <div class="col-md-2">
-        <h2>Recipe instructions</h2>
+        <h2>Recipe instructions:</h2>
       </div>
-    </div>
+    </div>      
   </div>
   <div class="container-fluid">
     <div class="row-fluid" id="recipe-grid">
+    </div>
+    <div class="pager">
+
     </div>
   </div>
 
