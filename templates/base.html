@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  
+  <script src="https://developer.edamam.com/attribution/badge.js"></script>
+  <script src="https://kit.fontawesome.com/993383dd35.js" crossorigin="anonymous"></script>
   <title>
     {% block title %}{% endblock %}
   </title>
@@ -28,6 +29,8 @@
     <li class="nav-item h3">    
       <a class="nav-link" href="/users/{{session['username']}}">User page</a>
     </li>
+    <ul class="navbar-nav ml-auto">
+  </ul>
 
       {% else %}
     <li class="nav-item h3">
@@ -44,6 +47,7 @@
   <p class="p-4 mb-1 display-2 text-dark"><b> Users can search for a recipe from any ingredients!</b></p>
   <p class="p-3 mb-3"><h3><b>We utilize API calls to search over 2.3 million recipes!</b></h3></p>
 </div>
+  <div class="float-right" id="edamam-badge" data-color="black"></div><br>
 <div class="container mt-5">
   {% for msg in get_flashed_messages() %}
   <div class="alert alert-info">{{ msg }}</div>
@@ -58,6 +62,7 @@
   <script type="text/javascript" src="/static/main.js"></script>
   <script type="text/javascript" src="/static/recipe.js"></script>
   <script type="text/javascript" src="/static/nav.js"></script>
+  <div d-flex justify-content-right id="edamam-badge" data-color="white"></div>
 </body>
 
 </html>

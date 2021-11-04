@@ -30,12 +30,14 @@ async function generateRecipeMarkup(recipe) {
     <div class="row">
       <div class="col-md-4 text-align" id="${recipe.recipeId}"><h3>${recipe.recipeName}</h3><br>
       <img class="visible-lg" src="${recipe.image}" alt="${recipe.recipeName} width="200" height="200" /><br>
-      <button type="submit" id="AddFavorite" data-id="${recipe.uri}" class="favorite-add btn btn-primary mb-2">Favorite!</button>
+      <button type="submit" id="AddFavorite" data-id="${recipe.uri}" class="favorite-add btn btn-danger mb-2">
+        <i class="far fa-heart"></i>
+      </button>
       </div>
       <div class="col-md-6 text-align" id="ingredients_${recipe.recipeId}"><h3>${recipe.ingredients}</h3>    
       </div>
       <div class="col-md-2 text-align" id="instructions_${recipe.recipeId}">
-      <a href="${recipe.url}"><h3>View cooking instructions for ${recipe.recipeName}!</h3></a><br>  
+      <a href="${recipe.url}" target="_blank" rel="noopener noreferrer"><h3>View cooking instructions for ${recipe.recipeName}!</h3></a><br>  
       </div>
     </div><br><hr>
       `);
@@ -67,7 +69,7 @@ function putNoRecipesErrorOnPage() {
   $recipeGrid.empty(); //clear existing recipes from the HTML grid
     // display error message with val
       const error = `<div class="alert alert-danger">
-                        <h2>No recipes matched your search</h2>
+                        <h2>No recipes matched your search.</h2>
                       </div>`
       $recipeGrid.append(error);
     $recipeGrid.show();

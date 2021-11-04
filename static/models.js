@@ -75,6 +75,9 @@ class Recipe{
         let ing5 = $('#ing5').val();
         let ingredients = [ing1, ing2, ing3, ing4, ing5]; //put values into array for API call
         let pageNum = $('pager').val();
+        let from;
+        let to;
+
         let recipeList =[];
         let counter = 0;
         let full_url = API_URL + ingredients + APP_KEY + APP_ID ; //dynamic API call using user ingredients
@@ -90,7 +93,9 @@ class Recipe{
                             let recipeUrl = value.recipe.url;
                             let recipeUri = value.recipe.uri;
                             let ingredientList=[];                          
-
+                            let isMore = value.recipe.more;
+                            console.log(isMore);
+                            
                             if (value.recipe.ingredientLines){ //seperate ingredients from the other data. 
                                 for(let i = 0; i < value.recipe.ingredientLines.length; i++){
                                     let ings = value.recipe.ingredientLines[i];

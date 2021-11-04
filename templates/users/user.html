@@ -11,13 +11,10 @@
   {% if 'username' in session %}
   <h3>{{ user.username }}'s home page</h3>
 
-  <form action="{{ url_for('homepage') }}">
-    <button class="btn btn-primary mb-2" >Search recipes by ingredients!</button>
-  </form>
-  <hr>
     <form action="{{ url_for('show_favorites', username=user.username) }}">
       <button class="btn btn-primary mb-2" >Show your favorite recipes!</button>
     </form>
+    <hr>
     <div class="container-fluid">
       <div class="row-fluid" id="favorite-grid">
     </div>

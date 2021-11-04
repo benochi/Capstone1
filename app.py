@@ -5,9 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 from models import connect_db, db, User, Favorite
 from forms import RegisterForm, LoginForm, DeleteForm
 
-
-
-
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
@@ -15,7 +12,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'shhh'
 
-#for localhosting - 'postgresql:///capstone'
+#for localhosting -'postgresql:///capstone'
 connect_db(app)
 
 # edamam API info
@@ -27,7 +24,7 @@ APP_ID = "&app_id=ae41cac9"
 HEADERS = ['Accept-Encoding:: gzip',
 'Content-Encoding:: gzip', 'Content-Type: application/json']
 
-### recipe mthod to make API call to Edamam, Chart.js, then convert that into HTML markup for Jinja ###
+### recipe method to make API call to Edamam, Chart.js, then convert that into HTML markup for Jinja ###
 ## Status 200 example.
 ##https://api.edamam.com/api/recipes/v2/recipe_b79327d05b8e5b838ad6cfd9576b30b6?id=recipe_b79327d05b8e5b838ad6cfd9576b30b6&type=public&app_id=ae41cac9&app_key=32509beddb44b3a9db39d36d46528abc
 
@@ -118,6 +115,21 @@ def add_favorite():
         db.session.commit()
     return(favorites_id)
 
+@app.route('/remove', methods=['POST', 'DELETE'])
+def remove_favorite():
+    #example - "DELETE from favorites WHERE favorites_id IS '%recipe_b79327d05b8e5b838ad6cfd9576b30b6%' AND users_id IS 3
+    username = session['username']
+    if request.method == 'DELETE':
+        favorite_id = request.values['favorite']
+        user = User.query.filter_by(username=username).first()
+        user_id = user.users_id
+        recipe_to_delete = Favorite.query.filter_by(favorites_id=favorite_id).filter_by(users_id=user_id).first()
+
+        db.session.delete(recipe_to_delete)
+        db.session.commit()
+
+    return(favorite_id)
+
     #iterate over Database favorite_ids and only add unique URLs
     #handle favorite recipe API calls and responses
     #https://api.edamam.com/api/recipes/v2/{id}
@@ -143,8 +155,14 @@ def show_favorites(username):
         if 'recipe' in recipe_id:
             full_url = API_URL + recipe_id + '?id=' + recipe_id + APP_TYPE + APP_KEY + APP_ID
             response = requests.get(full_url)
-            print(response)
             recipe_data = response.json()
+            if recipe_data.get("status") == "error":
+                error = recipe_data.get("message")
+                if not error:
+                    error = "API request failed"
+                raise Exception('API error!')
+           
+            
             fav_uri = recipe_data['recipe']['uri']
             f_id = fav_uri.split("#")
             fav_id = f_id[1]
@@ -165,7 +183,6 @@ def show_favorites(username):
         else:
             fav_list.remove(recipe_id)
 
-    print(fav_dict)
     return render_template("users/favorites.html", user=user, fav_dict=fav_dict)
 
 @app.route("/delete/<id>", methods=["GET", "POST"])
@@ -176,6 +193,5 @@ def delete_favorite(id):
    
     db.session.delete(recipe_to_delete)
     db.session.commit()
+
     return redirect(url_for('show_favorites', username=user))
-
-

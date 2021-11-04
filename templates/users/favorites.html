@@ -11,12 +11,10 @@
     {% if 'username' in session %}
     <h3>{{ user.username }}'s home page</h3>
 
-    <form action="{{ url_for('homepage') }}">
-        <button class="btn btn-primary mb-2" >Search recipes by ingredients!</button>
-    </form>
-    <hr>
+    
     <form action="{{ url_for('show_favorites', username=user.username) }}">
     <button class="btn btn-primary mb-2" >Show your favorite recipes!</button>
+    <hr>
     <div class="container-fluid">
         <div class="row">
           <div class="col-md-4">
@@ -32,7 +30,7 @@
       </div>
     </form>
     <div class="container-fluid">
-        <div class="row-fluid" id="favorite-grid">
+        <div class="row-fluid" id="favorite-grid">          
             {% for key, value in fav_dict.items() %}
                 {% for recipe in value %}
                     <div class="row">
@@ -40,7 +38,7 @@
                         <img class="visible-lg" src="{{ recipe.img }}" alt="{{ recipe.img }}" width="200" height="200" /><br>
                             <a href="/delete/{{ recipe.recipe_id }}" method="post" class="btn btn-danger mb-2">Delete Favorite.</a>
                         </div>
-                        <div class="col-md-6 text-align" id="ingredients_{{ recipe.name }}"><h2>Ingredients</h2><hr><h5>{{ recipe.ingredients|join(' ') }}</h5>    
+                        <div class="col-md-6 text-align" id="ingredients_{{ recipe.name }}"><h5>{{ recipe.ingredients|join(' ') }}</h5>    
                         </div>
                         <div class="col-md-2 text-align" id="instructions_{{ recipe.name }}">
                         <a href="{{ recipe.url }}"><h3>View cooking instructions for {{ recipe.name }}!</h3></a><br>  
@@ -48,10 +46,15 @@
                     </div><br><hr>
                 {% endfor %}
             {% endfor %}
+            {% if not fav_dict.items() %}
+            <div class="row">
+              <div class="alert alert-danger">
+                <h2>No recipes favorited, add some!</h2>
+              </div>
+            </div>
+            {% endif %}
         </div>
     </div>
-
-
     {% endif %}
 
 {% endblock %}
