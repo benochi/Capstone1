@@ -13,6 +13,11 @@ $(document).ready(function(){
             getAndShowNextPage();
         })
 
+        $("body").on('click', ".page-left", function(evt){
+            evt.preventDefault();
+            getAndShowPreviousPage();
+        })
+
         $("body").on("click", ".favorite-add", function(){
             let recipeNumber = $(this).attr('data-id');
             //uses global variable from recipe.js and calls function in recipe.js, using string value for arg#2

@@ -4,7 +4,7 @@
 let recipeListReponse = [];
 let favoriteRecipesList =[];
 let tempList = []; 
-let resultCount = 10;
+let resultCount = 0;
 
 async function getAndShowRecipes() {
   if (typeof $('#ing1').val() != 'undefined' && $('#ing1').val() != '') {
@@ -74,34 +74,60 @@ function putNoRecipesErrorOnPage() {
       $recipeGrid.append(error);
     $recipeGrid.show();
   }
-
+// ***** Pagination functions *****
   function addPaginationButton(recipeListReponse) {
     if(recipeListReponse.length >= 10) {
       $('#pager').empty().append('<button type="submit" id="page_right" data-id="${recipe.uri}" class="btn page-right"><i class="fas fa-arrow-right fa-5x"></i></button>');
     }
   }
-  
-// Pagination functions
+
+  function addPaginationPreviousButton(resultCount){
+    if(resultCount >= 10) { 
+      $('#pager-left').empty().append('<button type="submit" id="pager-left" data-id="${recipe.uri}" class="btn page-left"><i class="fas fa-arrow-left fa-5x"></i></button>');
+    }
+  }
 
 async function getAndShowNextPage(){
   console.log("Running get and show next page");
   if (typeof $('#ing1').val() != 'undefined' && $('#ing1').val() != '') {
+    resultCount += 10
     const recipePagesList = await Recipe.paginationRecipes(resultCount);
     if(recipePagesList.length == 0){
       putNoMorePagesError();
     }
-    else{
+    else{      
       putRecipesOnPage(recipePagesList);
       recipeListReponse = recipePagesList;
-      addPaginationButton(recipeListReponse);
-      resultCount += 10
-      console.log("resultcount increased")
+      addPaginationButton(recipeListReponse);  
+      console.log(resultCount);
+      addPaginationPreviousButton(resultCount);
     }
   }
   else {
     putStringErrorOnPage($('ing1').val())
   }
 }
+
+async function getAndShowPreviousPage(){
+  console.log("getAndShowPreviousPage running");
+  if (typeof $('#ing1').val() != 'undefined' && $('#ing1').val() != '') {
+    if(resultCount >= 10){  //don't let resultCount fall below 0
+      resultCount -= 10;
+      const recipePagesList = await Recipe.paginationRecipes(resultCount);   
+      putRecipesOnPage(recipePagesList);
+      recipeListReponse = recipePagesList;
+      addPaginationPreviousButton(recipeListReponse);
+    }
+    else {
+      $('#pager-left').empty() //remove left arrow for page 1
+    }
+    console.log(resultCount);
+  }
+  else {
+    putStringErrorOnPage($('ing1').val())
+  }
+}
+
 
 function putNoMorePagesError() {
   $recipeGrid.empty(); //clear existing recipes from the HTML grid
@@ -112,11 +138,3 @@ function putNoMorePagesError() {
       $recipeGrid.append(error);
     $recipeGrid.show();
   }
-
-//https://api.edamam.com/search?q=%22chicken%22&app_id=ae41cac9&app_key=32509beddb44b3a9db39d36d46528abc&from=10&to=20
-    /* "_links" : {
-    "next" : {
-      "title" : "Next page",
-      "href" : "https://api.edamam.com/api/food-database/v2/parser?..."
-    }
-} */
