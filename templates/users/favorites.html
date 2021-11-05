@@ -9,12 +9,10 @@
     <link rel="stylesheet" href="../../static/css/style.css">
 </head>
     {% if 'username' in session %}
-    <h3>{{ user.username }}'s home page</h3>
-
-    
-    <form action="{{ url_for('show_favorites', username=user.username) }}">
-    <button class="btn btn-primary mb-2" >Show your favorite recipes!</button>
-    <hr>
+    <h3>{{ user.first_name }} {{ user.last_name }}'s favorite recipes page.</h3>
+    <p>Here you can view your favorite recipes or remove old ones.</p>
+    <form action="{{ url_for('show_user', username=user.username) }}">
+    <button class="btn btn-primary mb-2" >Return to users page.</button>
     <div class="container-fluid">
         <div class="row">
           <div class="col-md-4">
@@ -36,12 +34,14 @@
                     <div class="row">
                         <div class="col-md-4 text-align" id="{{ recipe.name }}"><h3>{{ recipe.name }}</h3><br>
                         <img class="visible-lg" src="{{ recipe.img }}" alt="{{ recipe.img }}" width="200" height="200" /><br>
-                            <a href="/delete/{{ recipe.recipe_id }}" method="post" class="btn btn-danger mb-2">Delete Favorite.</a>
+                        <button type="submit" id="AddFavorite" data-id="{{ recipe.uri }}" class="favorite-add btn btn-danger mb-2">
+                          <i class="fas fa-heart"></i>
+                        </button>
                         </div>
                         <div class="col-md-6 text-align" id="ingredients_{{ recipe.name }}"><h5>{{ recipe.ingredients|join(' ') }}</h5>    
                         </div>
                         <div class="col-md-2 text-align" id="instructions_{{ recipe.name }}">
-                        <a href="{{ recipe.url }}"><h3>View cooking instructions for {{ recipe.name }}!</h3></a><br>  
+                        <a href="{{ recipe.url }}" target="_blank" rel="noopener noreferrer"><h3>View cooking instructions for {{ recipe.name }}!</h3></a><br>  
                         </div>
                     </div><br><hr>
                 {% endfor %}

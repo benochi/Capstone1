@@ -8,13 +8,17 @@ $(document).ready(function(){
             getAndShowRecipes();
         })
 
+        $("body").on('click', ".page-right", function(evt){
+            evt.preventDefault();
+            getAndShowNextPage();
+        })
+
         $("body").on("click", ".favorite-add", function(){
             let recipeNumber = $(this).attr('data-id');
             //uses global variable from recipe.js and calls function in recipe.js, using string value for arg#2
             let recipeNumberSplit = recipeNumber.split('#');
             let recipeNumberUri = recipeNumberSplit[1];
             let icon = $(this).find('i')
-            console.log(icon);
 
             if(icon.hasClass('far fa-heart')){
                 $.ajax({
@@ -26,7 +30,6 @@ $(document).ready(function(){
                     success: function(result)
                     {
                         if (result) {
-                            alert('added to fav');
                             icon.removeClass().addClass('fas fa-heart'); // <i class="fas fa-heart"></i>
                         } else {
                             alert('removed from fav');
@@ -52,18 +55,9 @@ $(document).ready(function(){
                     }
                 })
             }  
-          }); 
-
-        //$("#user-favorites").click(function(evt){
-        //    evt.preventDefault();
-        //    getAndShowFavorites();
-        //})
-    });
+          });
+});
     
-//pagination
-    /* "_links" : {
-    "next" : {
-      "title" : "Next page",
-      "href" : "https://api.edamam.com/api/food-database/v2/parser?..."
-    }
-} */
+    
+
+    

@@ -147,7 +147,7 @@ def show_favorites(username):
         if i.favorites_id not in favorite_list:
             favorite_list.append(i.favorites_id)
 
-    
+    #limited to 3 due to API limiting. 
     fav_list = favorite_list[:3]
      
     fav_dict = {"recipe":[]}
@@ -194,4 +194,4 @@ def delete_favorite(id):
     db.session.delete(recipe_to_delete)
     db.session.commit()
 
-    return redirect(url_for('show_favorites', username=user))
+    return '',204

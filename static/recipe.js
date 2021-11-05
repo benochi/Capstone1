@@ -4,11 +4,10 @@
 let recipeListReponse = [];
 let favoriteRecipesList =[];
 let tempList = []; 
+let resultCount = 10;
 
 async function getAndShowRecipes() {
-  console.log($('#ing1').val())
   if (typeof $('#ing1').val() != 'undefined' && $('#ing1').val() != '') {
-    console.log(ing1)
     const recipeList = await Recipe.getRecipes();
     if(recipeList.length == 0){
       putNoRecipesErrorOnPage();
@@ -16,6 +15,7 @@ async function getAndShowRecipes() {
     else{
       putRecipesOnPage(recipeList);
       recipeListReponse = recipeList;
+      addPaginationButton(recipeListReponse);
     }
   }
   else {
@@ -74,3 +74,49 @@ function putNoRecipesErrorOnPage() {
       $recipeGrid.append(error);
     $recipeGrid.show();
   }
+
+  function addPaginationButton(recipeListReponse) {
+    if(recipeListReponse.length >= 10) {
+      $('#pager').empty().append('<button type="submit" id="page_right" data-id="${recipe.uri}" class="btn page-right"><i class="fas fa-arrow-right fa-5x"></i></button>');
+    }
+  }
+  
+// Pagination functions
+
+async function getAndShowNextPage(){
+  console.log("Running get and show next page");
+  if (typeof $('#ing1').val() != 'undefined' && $('#ing1').val() != '') {
+    const recipePagesList = await Recipe.paginationRecipes(resultCount);
+    if(recipePagesList.length == 0){
+      putNoMorePagesError();
+    }
+    else{
+      putRecipesOnPage(recipePagesList);
+      recipeListReponse = recipePagesList;
+      addPaginationButton(recipeListReponse);
+      resultCount += 10
+      console.log("resultcount increased")
+    }
+  }
+  else {
+    putStringErrorOnPage($('ing1').val())
+  }
+}
+
+function putNoMorePagesError() {
+  $recipeGrid.empty(); //clear existing recipes from the HTML grid
+    // display error message with val
+      const error = `<div class="alert alert-danger">
+                        <h2>No more recipes matched your search.</h2>
+                      </div>`
+      $recipeGrid.append(error);
+    $recipeGrid.show();
+  }
+
+//https://api.edamam.com/search?q=%22chicken%22&app_id=ae41cac9&app_key=32509beddb44b3a9db39d36d46528abc&from=10&to=20
+    /* "_links" : {
+    "next" : {
+      "title" : "Next page",
+      "href" : "https://api.edamam.com/api/food-database/v2/parser?..."
+    }
+} */
