@@ -49,5 +49,19 @@
 }
 
 body {
-    background-color: #e8ecf8;
+    background: 
+  /* On "top" */
+  repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    #ccc 10px,
+    #ccc 20px
+  ),
+  /* on "bottom" */
+  linear-gradient(
+    to bottom,
+    #eee,
+    rgb(134, 192, 192)
+  ); 
 }
