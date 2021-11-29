@@ -78,6 +78,8 @@ function putNoRecipesErrorOnPage() {
   function addPaginationButton(recipeListReponse) {
     if(recipeListReponse.length >= 10) {
       $('#pager').empty().append('<button type="submit" id="page_right" data-id="${recipe.uri}" class="btn page-right"><i class="fas fa-arrow-right fa-5x"></i></button>');
+    }else{
+      $('#pager').empty();
     }
   }
 
