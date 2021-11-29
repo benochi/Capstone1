@@ -9,8 +9,9 @@ let resultCount = 0;
 async function getAndShowRecipes() {
   if (typeof $('#ing1').val() != 'undefined' && $('#ing1').val() != '') {
     const recipeList = await Recipe.getRecipes();
+    $('#pager').empty();
     if(recipeList.length == 0){
-      putNoRecipesErrorOnPage();
+      putNoRecipesErrorOnPage();    
     }
     else{
       putRecipesOnPage(recipeList);
@@ -79,9 +80,6 @@ function putNoRecipesErrorOnPage() {
     if(recipeListReponse.length >= 10) {
       $('#pager').empty().append('<button type="submit" id="page_right" data-id="${recipe.uri}" class="btn page-right"><i class="fas fa-arrow-right fa-5x"></i></button>');
     }
-    else{
-      $('#pager').empty();
-    }
   }
 
   function addPaginationPreviousButton(resultCount){
@@ -97,7 +95,7 @@ async function getAndShowNextPage(){
     const recipePagesList = await Recipe.paginationRecipes(resultCount);
     if(recipePagesList.length == 0){
       putNoMorePagesError();
-      resultCount =0;
+      resultCount = 0;
     }
     else{      
       putRecipesOnPage(recipePagesList);
