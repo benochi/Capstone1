@@ -11,7 +11,6 @@ async function getAndShowRecipes() {
     const recipeList = await Recipe.getRecipes();
     if(recipeList.length == 0){
       putNoRecipesErrorOnPage();
-      resultCount =0;
     }
     else{
       putRecipesOnPage(recipeList);
@@ -79,7 +78,8 @@ function putNoRecipesErrorOnPage() {
   function addPaginationButton(recipeListReponse) {
     if(recipeListReponse.length >= 10) {
       $('#pager').empty().append('<button type="submit" id="page_right" data-id="${recipe.uri}" class="btn page-right"><i class="fas fa-arrow-right fa-5x"></i></button>');
-    }else{
+    }
+    else{
       $('#pager').empty();
     }
   }
@@ -97,6 +97,7 @@ async function getAndShowNextPage(){
     const recipePagesList = await Recipe.paginationRecipes(resultCount);
     if(recipePagesList.length == 0){
       putNoMorePagesError();
+      resultCount =0;
     }
     else{      
       putRecipesOnPage(recipePagesList);
