@@ -59,6 +59,7 @@ function putStringErrorOnPage(val) {
   
     $recipeGrid.empty(); //clear existing recipes from the HTML grid
     $('#pager').empty();
+    $('#pager-left').empty()
     // display error message with val
       const error = `<div class="alert alert-danger">
                         <h2>ingredient 1: You must provide at least one ingredient</h2>
