@@ -11,6 +11,7 @@ async function getAndShowRecipes() {
     const recipeList = await Recipe.getRecipes();
     if(recipeList.length == 0){
       putNoRecipesErrorOnPage();
+      resultCount =0;
     }
     else{
       putRecipesOnPage(recipeList);
